@@ -4,8 +4,6 @@
 service_account_project  = "project-id-12345"
 
 /*
-  Run with service_account_project value above:
-  gcloud iam service-accounts keys create key-file \
-    --iam-account=terraform@project-id-12345.iam.gserviceaccount.com
+  Run ./scripts/download_service_account_key.json to get this file
 */
-credentials_file         = "path/to/service-account-key.json"
+credentials_file         = "./infrastructure/service-account-key.json"
