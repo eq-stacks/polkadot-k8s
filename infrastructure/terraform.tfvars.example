@@ -6,4 +6,32 @@ service_account_project  = "project-id-12345"
 /*
   Run ./scripts/download_service_account_key.json to get this file
 */
-credentials_file         = "./infrastructure/service-account-key.json"
+credentials_file         = "./service-account-key.json"
+
+/*
+  Target project information
+*/
+target_project_id = "project-id-12345"
+target_project_name = "Project Name"
+
+/*
+  The ID of the GCP Billing account
+*/
+billing_account         = "XXXXXX-XXXXXX-XXXXXX"
+
+/*
+  The numeric ID of the GCP organization
+*/
+org_id                   = 1234567890
+
+/*
+  Project owner email addresses
+*/
+project_owners = [
+    "user:email@example.com"
+  ]
+
+/*
+  The ID of the GCP project that contains the host vpc
+*/
+project_host_vpc = "project-id-54321"
