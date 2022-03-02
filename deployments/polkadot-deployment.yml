@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: polkadot-polkadot
+spec:
+  selector:
+    matchLabels:
+      app: polkadot-polkadot
+  template:
+    metadata:
+      labels:
+        app: polkadot-polkadot
+    spec:
+      containers:
+      - name: polkadot-polkadot
+        image: parity/polkadot:v0.9.17
+        command: [
+          "polkadot",
+          "--validator",
+          '--name="EQDot"'
+        ]
+        resources:
+          limits:
+            memory: 8000Mi
+            cpu: 3000m
+        ports:
+        - containerPort: 30333
