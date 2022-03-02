@@ -36,6 +36,9 @@ spec:
             '--name="EQDot"'
           ]
           resources:
+            requests:
+              memory: 8000Mi
+              cpu: 3000m
             limits:
               memory: 8000Mi
               cpu: 3000m
