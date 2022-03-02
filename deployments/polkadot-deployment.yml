@@ -27,6 +27,9 @@ spec:
       containers:
         - name: polkadot-polkadot
           image: parity/polkadot:v0.9.17
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsUser: 1000
           command: [
             "polkadot",
             "--validator",
