@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: polkadot-polkadot
+  namespace: polkadot
 spec:
   selector:
     matchLabels:
@@ -12,6 +13,17 @@ spec:
       labels:
         app: polkadot-polkadot
     spec:
+      initContainers:
+        - name: chown
+          image: busybox
+          command:
+            - chown
+            - -R
+            - "1000:1000"
+            - /polkadot
+          volumeMounts:
+            - mountPath: /polkadot
+              name: polkadot-polkadot-data
       containers:
         - name: polkadot-polkadot
           image: parity/polkadot:v0.9.17
@@ -26,3 +38,14 @@ spec:
               cpu: 3000m
           ports:
             - containerPort: 30333
+          volumeMounts:
+            - mountPath: /polkadot
+              name: polkadot-polkadot-data
+            - mountPath: /tmp
+              name: tmp
+      volumes:
+        - name: polkadot-polkadot-data
+          persistentVolumeClaim:
+            claimName: polkadot-polkadot-data
+        - name: tmp
+          emptyDir: {}
