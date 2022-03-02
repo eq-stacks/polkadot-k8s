@@ -35,3 +35,8 @@ project_owners = [
   The ID of the GCP project that contains the host vpc
 */
 project_host_vpc = "project-id-54321"
+
+/*
+  The ID of the desired subnetwork from the Shared vpc
+*/
+subnetwork_id = "us-east4-3"
