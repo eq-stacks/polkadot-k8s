@@ -3,3 +3,5 @@ infrastructure/.terraform
 infrastructure/service-account-key.json 
 infrastructure/terraform.tfstate*
 infrastructure/terraform.tfvars
+
+configmap.yml
