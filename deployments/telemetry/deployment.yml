@@ -10,6 +10,15 @@ spec:
     matchLabels:
       app: telemetry
   template:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - telemetry
+          topologyKey: "kubernetes.io/hostname"
     metadata:
       labels:
         app: telemetry
