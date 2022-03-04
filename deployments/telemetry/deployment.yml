@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,40 +15,40 @@ spec:
         app: telemetry
     spec:
       containers:
-      - name: core
-        image: parity/substrate-telemetry-backend
-        command:
-          - telemetry_core
-          - -l
-          - 127.0.0.1:8888
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 8888
-      - name: sharding
-        image: parity/substrate-telemetry-backend
-        command:
-          - telemetry_shard
-          - -l
-          - 127.0.0.1:8001
-          - -c
-          - http://127.0.0.1:8888/shard_submit
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 8001
-      - name: frontend
-        image: parity/substrate-telemetry-frontend
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-          - containerPort: 8000
-        env:
-          - name: SUBSTRATE_TELEMETRY_URL
-            value: ws://localhost:8888/feed
+        - name: core
+          image: parity/substrate-telemetry-backend
+          command:
+            - telemetry_core
+            - -l
+            - 127.0.0.1:8888
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8888
+        - name: sharding
+          image: parity/substrate-telemetry-backend
+          command:
+            - telemetry_shard
+            - -l
+            - 127.0.0.1:8001
+            - -c
+            - http://127.0.0.1:8888/shard_submit
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8001
+        - name: frontend
+          image: parity/substrate-telemetry-frontend
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SUBSTRATE_TELEMETRY_URL
+              value: ws://localhost:8888/feed
