@@ -133,3 +133,8 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     # ]
   }
 }
+
+resource "google_compute_global_address" "polkadot-telemetry" {
+  name    = "polkadot-telemetry"
+  project = google_project.target_project.project_id
+}
