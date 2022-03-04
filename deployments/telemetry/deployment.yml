@@ -10,19 +10,20 @@ spec:
     matchLabels:
       app: telemetry
   template:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: app
-                operator: In
-                values:
-                  - telemetry
-          topologyKey: "kubernetes.io/hostname"
     metadata:
       labels:
         app: telemetry
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - telemetry
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: core
           image: parity/substrate-telemetry-backend
