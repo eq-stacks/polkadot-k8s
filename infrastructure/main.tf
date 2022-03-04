@@ -138,3 +138,8 @@ resource "google_compute_global_address" "polkadot-telemetry" {
   name    = "polkadot-telemetry"
   project = google_project.target_project.project_id
 }
+
+resource "google_compute_global_address" "polkadot-telemetry-core" {
+  name    = "polkadot-telemetry-core"
+  project = google_project.target_project.project_id
+}
