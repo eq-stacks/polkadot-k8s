@@ -31,6 +31,7 @@ spec:
           ports:
             - containerPort: 8888
           securityContext:
+            runAsUser: 1000
             readOnlyRootFilesystem: true
         - name: sharding
           image: parity/substrate-telemetry-backend
@@ -50,6 +51,7 @@ spec:
           ports:
             - containerPort: 8001
           securityContext:
+            runAsUser: 1000
             readOnlyRootFilesystem: true
         - name: frontend
           image: parity/substrate-telemetry-frontend
