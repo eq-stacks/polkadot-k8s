@@ -27,6 +27,8 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 8888
+          securityContext:
+            readOnlyRootFilesystem: true
         - name: sharding
           image: parity/substrate-telemetry-backend
           command:
@@ -41,6 +43,8 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 8001
+          securityContext:
+            readOnlyRootFilesystem: true
         - name: frontend
           image: parity/substrate-telemetry-frontend
           resources:
@@ -52,3 +56,20 @@ spec:
           env:
             - name: SUBSTRATE_TELEMETRY_URL
               value: ws://localhost:8888/feed
+          securityContext:
+            runAsUser: 101
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /var/cache/nginx
+              name: nginx-cache
+            - mountPath: /var/run
+              name: run
+            - mountPath: /app/tmp
+              name: tmp
+      volumes:
+        - name: nginx-cache
+          emptyDir: {}
+        - name: run
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
