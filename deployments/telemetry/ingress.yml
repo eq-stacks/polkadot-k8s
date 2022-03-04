@@ -1,0 +1,42 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: polkadot-telemetry
+    kubernetes.io/ingress.class: "gce"
+  name: telemetry
+  labels:
+    name: telemetry
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: telemetry-frontend
+                port:
+                  number: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: polkadot-telemetry-core
+    kubernetes.io/ingress.class: "gce"
+  name: telemetry-core
+  labels:
+    name: telemetry-core
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: telemetry-core
+                port:
+                  number: 8888
