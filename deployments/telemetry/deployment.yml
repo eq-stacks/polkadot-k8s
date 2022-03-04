@@ -30,7 +30,7 @@ spec:
           command:
             - telemetry_core
             - -l
-            - 127.0.0.1:8888
+            - 0.0.0.0:8888
           resources:
             limits:
               memory: "128Mi"
@@ -76,7 +76,10 @@ spec:
             - containerPort: 8000
           env:
             - name: SUBSTRATE_TELEMETRY_URL
-              value: ws://localhost:8888/feed
+              valueFrom:
+                configMapKeyRef:
+                  name: config-telemetry
+                  key: substrate_telemetry_url
           securityContext:
             runAsUser: 101
             readOnlyRootFilesystem: true
