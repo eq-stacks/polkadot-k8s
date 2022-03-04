@@ -25,6 +25,9 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
           ports:
             - containerPort: 8888
           securityContext:
@@ -41,6 +44,9 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
           ports:
             - containerPort: 8001
           securityContext:
@@ -49,6 +55,9 @@ spec:
           image: parity/substrate-telemetry-frontend
           resources:
             limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
               memory: "128Mi"
               cpu: "500m"
           ports:
