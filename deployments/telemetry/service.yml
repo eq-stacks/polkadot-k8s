@@ -16,7 +16,7 @@ kind: Service
 metadata:
   name: telemetry-core
   annotations:
-    cloud.google.com/backend-config: '{"ports": {"8888":"telemetry-core-backendconfig"}}'
+    cloud.google.com/backend-config: '{"ports": {"8888":"telemetry-core-bec"}}'
     cloud.google.com/neg: '{"ingress": true}'
 spec:
   type: LoadBalancer
@@ -29,7 +29,7 @@ spec:
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: telemetry-core-backendconfig
+  name: telemetry-core-bec
 spec:
   timeoutSec: 120
   healthCheck:
