@@ -43,26 +43,14 @@ spec:
           securityContext:
             runAsUser: 1000
             readOnlyRootFilesystem: true
-        - name: sharding
-          image: parity/substrate-telemetry-backend
-          command:
-            - telemetry_shard
-            - -l
-            - 127.0.0.1:8001
-            - -c
-            - http://127.0.0.1:8888/shard_submit
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-            requests:
-              memory: "128Mi"
-              cpu: "500m"
-          ports:
-            - containerPort: 8001
-          securityContext:
-            runAsUser: 1000
-            readOnlyRootFilesystem: true
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
         - name: frontend
           image: parity/substrate-telemetry-frontend
           resources:

@@ -30,25 +30,47 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
             runAsUser: 1000
-          command: [
-            "polkadot",
-            "--validator",
-            '--name="EQDot"'
-          ]
+          command:
+            - polkadot
+            - --validator
+            - --name=EQDot
+            - --telemetry-url
+            - "ws://localhost:8001/submit 0"
           resources:
             requests:
-              memory: 8000Mi
-              cpu: 3000m
+              memory: 7500Mi
+              cpu: 2500m
             limits:
-              memory: 8000Mi
-              cpu: 3000m
+              memory: 7500Mi
+              cpu: 2500m
           ports:
             - containerPort: 30333
+            - containerPort: 9944
           volumeMounts:
             - mountPath: /polkadot
               name: polkadot-polkadot-data
             - mountPath: /tmp
               name: tmp
+        - name: sharding
+          image: parity/substrate-telemetry-backend
+          command:
+            - telemetry_shard
+            - -l
+            - 0.0.0.0:8001
+            - -c
+            - http://telemetry-core:8888/shard_submit
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8001
+          securityContext:
+            runAsUser: 1000
+            readOnlyRootFilesystem: true
       volumes:
         - name: polkadot-polkadot-data
           persistentVolumeClaim:
