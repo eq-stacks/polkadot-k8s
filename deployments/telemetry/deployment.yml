@@ -43,14 +43,6 @@ spec:
           securityContext:
             runAsUser: 1000
             readOnlyRootFilesystem: true
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: http
         - name: frontend
           image: parity/substrate-telemetry-frontend
           resources:
